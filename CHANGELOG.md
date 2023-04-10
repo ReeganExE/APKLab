@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.6.2] - 2023-04-10
+
+### Added
+
+- Added an option to pass `certificatePath` to apk-mit.
+
+### Fixed
+
+- Improved build time by using `esbuild` instead of `webpack`.
+
 ## [1.6.1] - 2022-07-31
 
 ### Added
