@@ -172,6 +172,11 @@
         "configuration": {
             "title": "APKLab",
             "properties": {
+                "apklab.certificatePath": {
+                    "type": "string",
+                    "default": "",
+                    "markdownDescription": "Specify the path to the certificate that will be included in the APK when performing HTTPS inspection."
+                },
                 "apklab.apktoolPath": {
                     "type": "string",
                     "default": "",
@@ -221,14 +226,16 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "yarn clean && webpack --mode production --devtool hidden-source-map",
+        "vscode:prepublish1": "webpack --mode production --devtool hidden-source-map",
+        "vscode:prepublish": "node build.mjs",
         "compile": "tsc -p ./",
         "lint": "eslint src --ext ts && prettier --check .",
         "fix": "prettier --write . && eslint src --ext ts --fix",
         "clean": "git clean -Xdf -e !node_modules -e !node_modules/**/* -e !.vscode-test -e !.vscode-test/**/*",
         "pretest": "yarn compile",
         "test": "node ./out/test/runTest.js",
-        "package": "vsce package --yarn",
+        "package": "vsce package --no-yarn",
+        "build": "npm run package",
         "watch": "webpack --watch"
     },
     "devDependencies": {

@@ -14,3 +14,4 @@ webpack.config.js
 .github/
 testdata
 .*
+build.mjs

@@ -9,6 +9,9 @@
         "plugin:import/typescript",
         "prettier"
     ],
+    "env": {
+        "node": true
+    },
     "rules": {
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/explicit-module-boundary-types": "error",

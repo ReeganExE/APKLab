@@ -1,7 +1,7 @@
 import * as path from "path";
 import { applyPatches, observeListr } from "apk-mitm";
 import * as vscode from "vscode";
-import { outputChannel } from "../data/constants";
+import { extensionConfigName, outputChannel } from "../data/constants";
 
 // Defined in webpack config
 declare const APK_MITM_VERSION: string;
@@ -28,11 +28,17 @@ export namespace apkMitm {
                 );
             }
 
+            const extensionConfig =
+                vscode.workspace.getConfiguration(extensionConfigName);
+            const certificatePath =
+                extensionConfig.get<string>("certificatePath");
             const projectDir = path.dirname(apktoolYmlPath);
 
-            await observeListr(applyPatches(projectDir)).forEach((line) =>
-                outputChannel.appendLine(line)
-            );
+            await observeListr(
+                applyPatches(projectDir, {
+                    certificatePath: certificatePath,
+                })
+            ).forEach((line) => outputChannel.appendLine(line));
 
             outputChannel.appendLine("\nSuccessfully applied MITM patches!");
             vscode.window.showInformationMessage(
